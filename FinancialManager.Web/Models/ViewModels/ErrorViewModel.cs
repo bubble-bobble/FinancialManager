@@ -1,4 +1,4 @@
-namespace FinancialManager.Web.Models;
+namespace FinancialManager.Web.Models.ViewModels;
 
 public class ErrorViewModel
 {

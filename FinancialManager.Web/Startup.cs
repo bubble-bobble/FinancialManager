@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FinancialManager.Web.Repositories;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ public class Startup(IConfiguration configuration)
     {
         services.AddControllersWithViews();
         services.AddAutoMapper(typeof(Startup));
+        services.AddTransient<IAccountTypesRepository, AccountTypesRepository>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
