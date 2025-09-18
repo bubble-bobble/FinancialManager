@@ -10,6 +10,14 @@ namespace FinancialManager.Web.Controllers;
 public class AccountTypesController(IAccountTypesRepository accountTypesRepository, IMapper mapper) : Controller
 {
     [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        const int userId = 1;
+        var accountTypes = await accountTypesRepository.SelectAccountTypes(userId);
+        return View(accountTypes);
+    }
+    
+    [HttpGet]
     public IActionResult Create()
     {
         return View();
