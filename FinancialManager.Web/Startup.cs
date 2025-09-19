@@ -16,6 +16,7 @@ public class Startup(IConfiguration configuration)
         services.AddControllersWithViews();
         services.AddAutoMapper(typeof(Startup));
         services.AddTransient<IAccountTypesRepository, AccountTypesRepository>();
+        services.AddTransient<IUsersRepository, UsersRepository>();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
