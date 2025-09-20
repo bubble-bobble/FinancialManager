@@ -9,5 +9,6 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<CreateAccountTypeViewModel, AccountType>();
+        CreateMap<AccountType, EditAccountTypeViewModel>().ReverseMap();
     }
 }

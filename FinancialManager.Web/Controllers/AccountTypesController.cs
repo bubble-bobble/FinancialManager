@@ -41,6 +41,34 @@ public class AccountTypesController(
         return RedirectToAction("Index", "AccountTypes");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        var userId = usersRepository.SelectUserId();
+        var accountType = await accountTypesRepository.SelectAccountType(id, userId);
+        if (accountType is null)
+        {
+            return RedirectToAction("Error", "Home");
+        }
+        var updateAccountTypeViewModel = mapper.Map<EditAccountTypeViewModel>(accountType);
+        return View(updateAccountTypeViewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditAccountTypeViewModel editAccountType)
+    {
+        var userId = usersRepository.SelectUserId();
+        var accountTypeExist = await accountTypesRepository.SelectAccountType(editAccountType.Id, userId);
+        if (accountTypeExist is null)
+        {
+            return RedirectToAction("Error", "Home");
+        }
+        
+        var accountType = mapper.Map<AccountType>(editAccountType);
+        await accountTypesRepository.UpdateAccountType(accountType);
+        return RedirectToAction("Index", "AccountTypes");       
+    }
+    
     public async Task<IActionResult> ValidateAccountTypeName(string name)
     {
         var userId = usersRepository.SelectUserId();
